@@ -1,0 +1,49 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+
+mat-expansion-panel.mat-expansion-panel,
+mat-card {
+  margin-bottom: 16px;
+}
+
+body {
+  background-color: rgb(240, 240, 240);
+}
+
+
+mat-form-field {
+  width: 100%;
+}
+
+@import '~@angular/material/theming';
+@include mat-core();
+
+$app-primary: mat-palette($mat-indigo);
+$app-accent:  mat-palette($mat-pink, A200, A100, A400);
+$app-warn:    mat-palette($mat-red);
+
+$font-config: mat-typography-config();
+
+$app-theme: mat-light-theme($app-primary, $app-accent, $app-warn);
+$foreground: map-get($app-theme, foreground);
+
+@include angular-material-theme($app-theme);
+
+$config: mat-typography-config();
+.radio-label {
+  @include mat-typography-level-to-styles($config, caption);
+  color: mat-color($foreground, secondary-text);
+}
+
+
+pre {
+  font-family: monospace;
+  font-size: 11px;
+}
+
+.ast {
+  pre {
+  max-height: 300px;
+  overflow: auto;
+}}
