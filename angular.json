@@ -11,6 +11,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "deleteOutputPath": false,
             "outputPath": "dist",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -19,8 +20,8 @@
             "assets": ["src/assets", "src/favicon.ico"],
             "styles": ["src/styles.scss"],
             "scripts": [],
-            "baseHref": "ESpression-tester",
-            "deployUrl": "ESpression-tester"
+            "baseHref": "/ESpression-tester/",
+            "deployUrl": ""
           },
           "configurations": {
             "production": {
