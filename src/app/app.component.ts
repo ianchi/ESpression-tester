@@ -10,7 +10,7 @@ import { JsonPathParser, JsonPathStaticEval, ES5PathParser } from 'espression-js
 export class AppComponent {
   title = 'app';
   expression = 'a + b * c';
-  ast: INode;
+  ast: INode | undefined;
   parser: Parser;
   eval: StaticEval;
   value: any;
@@ -21,7 +21,10 @@ export class AppComponent {
 
   constructor() {
     this.changePreset();
-    this.updateContext(null);
+    this.updateContext();
+
+    this.parser = new ES5Parser();
+    this.eval = new ES5StaticEval();
   }
 
   changePreset() {
@@ -43,9 +46,9 @@ export class AppComponent {
         this.eval = new JsonPathStaticEval();
         break;
     }
-    this.updateExpression(null);
+    this.updateExpression();
   }
-  updateExpression(_event?) {
+  updateExpression() {
     try {
       this.ast = this.parser.parse(this.expression);
       this.value = this.eval.evaluate(this.ast, this.context);
@@ -59,7 +62,7 @@ export class AppComponent {
     }
   }
 
-  updateContext(_event?) {
+  updateContext() {
     try {
       this.context = JSON.parse(this.contextStr);
       if (typeof this.context !== 'object') {
@@ -92,6 +95,6 @@ export class AppComponent {
         },
       };
     }
-    this.updateExpression(null);
+    this.updateExpression();
   }
 }

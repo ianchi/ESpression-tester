@@ -4,12 +4,13 @@
   </mat-toolbar>
   <mat-card>
     <p class="mat-subheading-1">
-      <a href="https://github.com/ianchi/ESpression">ESpression</a> is a small and customizable EcmaScript expression parser and static eval, with support for jsonPath.
+      <a href="https://github.com/ianchi/ESpression">ESpression</a> is a small and customizable EcmaScript expression parser and
+      static eval, with support for jsonPath.
 
     </p>
     <p class="mat-caption">
-      This playground lets you select a preset to use and enter expressions to parse and evaluate. An optional context for the
-      evaluation can be defined in json format.
+      This playground lets you select a preset to use and enter expressions to parse and
+      evaluate. An optional context for the evaluation can be defined in json format.
     </p>
   </mat-card>
 </div>
@@ -26,8 +27,8 @@
 
   </mat-radio-group>
   <mat-form-field>
-    <textarea matInput placeholder="Expression" matTextareaAutosize matAutosizeMinRows="1" matAutosizeMaxRows="5" (input)="updateExpression($event)"
-      [(ngModel)]="expression"></textarea>
+    <textarea matInput placeholder="Expression" matTextareaAutosize matAutosizeMinRows="1"
+      matAutosizeMaxRows="5" (input)="updateExpression()" [(ngModel)]="expression"></textarea>
   </mat-form-field>
 </mat-card>
 
@@ -40,7 +41,8 @@
     Standard built-in objects
   </mat-checkbox>
   <mat-form-field>
-    <textarea matInput matTextareaAutosize matAutosizeMinRows="1" matAutosizeMaxRows="10" (input)="updateContext($event)" [(ngModel)]="contextStr"></textarea>
+    <textarea matInput matTextareaAutosize matAutosizeMinRows="1" matAutosizeMaxRows="10"
+      (input)="updateContext()" [(ngModel)]="contextStr"></textarea>
   </mat-form-field>
 </mat-expansion-panel>
 
@@ -60,8 +62,8 @@
     </mat-card-title>
   </mat-card-header>
   <mat-card-content class="ast">
-  <pre>
+    <pre>
   {{ast | json}}
 </pre>
-</mat-card-content>
+  </mat-card-content>
 </mat-card>
