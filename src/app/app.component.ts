@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ES5Parser, ES5StaticEval, BasicParser, Parser, StaticEval, INode } from 'espression';
-import { JsonPathParser, JsonPathStaticEval, ES5PathParser } from 'espression-jsonpath';
+import { JsonPathParser, JsonPathStaticEval, ESPathParser } from 'espression-jsonpath';
 
 @Component({
   selector: 'app-root',
@@ -42,7 +42,7 @@ export class AppComponent {
         this.eval = new JsonPathStaticEval();
         break;
       case 'ES5+jP':
-        this.parser = new ES5PathParser();
+        this.parser = new ESPathParser();
         this.eval = new JsonPathStaticEval();
         break;
     }
