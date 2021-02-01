@@ -3,14 +3,11 @@
   "version": "0.0.1",
   "license": "MIT",
   "scripts": {
-    "gh-pages-init": "rm rf dist && git worktree add dist gh-pages",
+    "gh-pages-init": "rm -rf dist && git worktree add dist gh-pages",
     "release": "cd dist && git add --all && git commit -m 'gh-pages release' && git push",
-    "ng": "ng",
     "start": "ng serve",
     "build": "rm -rf dist/* && ng build --prod",
-    "test": "ng test",
-    "lint": "ng lint",
-    "e2e": "ng e2e"
+    "lint": "ng lint"
   },
   "private": true,
   "dependencies": {
