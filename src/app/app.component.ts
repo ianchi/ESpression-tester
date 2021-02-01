@@ -1,5 +1,13 @@
 import { Component } from '@angular/core';
-import { ES5Parser, ES5StaticEval, BasicParser, Parser, StaticEval, INode } from 'espression';
+import {
+  ESnextParser,
+  ES6StaticEval,
+  BasicParser,
+  Parser,
+  BasicEval,
+  StaticEval,
+  INode,
+} from 'espression';
 import { JsonPathParser, JsonPathStaticEval, ESPathParser } from 'espression-jsonpath';
 
 @Component({
@@ -23,19 +31,19 @@ export class AppComponent {
     this.changePreset();
     this.updateContext();
 
-    this.parser = new ES5Parser();
-    this.eval = new ES5StaticEval();
+    this.parser = new ESnextParser();
+    this.eval = new ES6StaticEval();
   }
 
   changePreset() {
     switch (this.preset) {
-      case 'ES5':
-        this.parser = new ES5Parser();
-        this.eval = new ES5StaticEval();
+      case 'ES6':
+        this.parser = new ESnextParser();
+        this.eval = new ES6StaticEval();
         break;
       case 'jsep':
         this.parser = new BasicParser();
-        this.eval = new ES5StaticEval();
+        this.eval = new BasicEval();
         break;
       case 'jsonPath':
         this.parser = new JsonPathParser();
