@@ -17,29 +17,32 @@ import { JsonPathParser, JsonPathStaticEval, ESPathParser } from 'espression-jso
 })
 export class AppComponent {
   title = 'app';
-  expression = 'a + b * c';
+  expression = 'a + b ';
   ast: INode | undefined;
   parser: Parser;
   eval: StaticEval;
   value: any;
-  context: any = { a: 1, b: 2, c: 3 };
-  contextStr = '{"a": 1, "b": 2, "c": 3}';
+  context: any = { a: 1, b: 2, foo: { x: 10, y: 20 } };
+  contextStr = '{a: 1, b: 2, foo: { x:10, y:20 } }';
   builtins = true;
-  preset = 'ES5';
+  preset = 'ES6';
+
+  esParser = new ESnextParser();
+  staticEval = new ES6StaticEval();
 
   constructor() {
     this.changePreset();
     this.updateContext();
 
-    this.parser = new ESnextParser();
-    this.eval = new ES6StaticEval();
+    this.parser = this.esParser;
+    this.eval = this.staticEval;
   }
 
   changePreset() {
     switch (this.preset) {
       case 'ES6':
-        this.parser = new ESnextParser();
-        this.eval = new ES6StaticEval();
+        this.parser = this.esParser;
+        this.eval = this.staticEval;
         break;
       case 'jsep':
         this.parser = new BasicParser();
@@ -59,10 +62,14 @@ export class AppComponent {
   updateExpression() {
     try {
       this.ast = this.parser.parse(this.expression);
-      this.value = this.eval.evaluate(this.ast, this.context);
+      try {
+        this.value = this.eval.evaluate(this.ast, this.context);
+      } catch (e) {
+        this.value = e.message;
+      }
     } catch (e) {
       this.ast = e.message;
-      this.value = undefined;
+      this.value = 'N/A';
     }
 
     if (typeof this.value === 'undefined') {
@@ -72,8 +79,13 @@ export class AppComponent {
 
   updateContext() {
     try {
-      this.context = JSON.parse(this.contextStr);
-      if (typeof this.context !== 'object') {
+      const ast = this.esParser.parse(this.contextStr);
+      this.context = this.staticEval.evaluate(ast);
+      if (
+        typeof this.context !== 'object' ||
+        Array.isArray(this.context) ||
+        this.context === null
+      ) {
         this.context = {};
       }
     } catch (e) {
