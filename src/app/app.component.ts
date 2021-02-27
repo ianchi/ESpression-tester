@@ -22,6 +22,7 @@ export class AppComponent {
   parser: Parser;
   eval: StaticEval;
   value: any;
+  showValue = '';
   context: any = { a: 1, b: 2, foo: { x: 10, y: 20 } };
   contextStr = '{a: 1, b: 2, foo: { x:10, y:20 } }';
   builtins = true;
@@ -65,15 +66,25 @@ export class AppComponent {
       try {
         this.value = this.eval.evaluate(this.ast, this.context);
       } catch (e) {
-        this.value = e.message;
+        this.showValue = `ERROR: "${e.message}"`;
+        return;
       }
     } catch (e) {
       this.ast = e.message;
-      this.value = 'N/A';
+      this.showValue = '';
+      return;
     }
 
-    if (typeof this.value === 'undefined') {
-      this.value = 'undefined';
+    switch (typeof this.value) {
+      case 'string':
+      case 'object':
+        this.showValue = JSON.stringify(this.value);
+        break;
+      case 'undefined':
+        this.showValue = 'undefined';
+        break;
+      default:
+        this.showValue = this.value.toString();
     }
   }
 
