@@ -13,9 +13,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { ValidExpressionDirective } from './validExpression.directive';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, ValidExpressionDirective],
   imports: [
     BrowserModule,
     FormsModule,

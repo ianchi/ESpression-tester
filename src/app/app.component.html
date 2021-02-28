@@ -45,6 +45,8 @@
   </mat-checkbox>
   <mat-form-field>
     <textarea
+      #contextTxt="ngModel"
+      validExpression
       matInput
       [matTextareaAutosize]="true"
       [matAutosizeMinRows]="1"
@@ -52,6 +54,9 @@
       (input)="updateContext()"
       [(ngModel)]="contextStr"
     ></textarea>
+    <mat-error>
+      {{ contextTxt.getError('validExpression')?.message }}
+    </mat-error>
   </mat-form-field>
 </mat-expansion-panel>
 
